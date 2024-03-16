@@ -1,7 +1,5 @@
 `timescale 1ns / 1ps
 
-`include "FullAdder.v"
-
 module RippleCarryAdder(input [BITS-1:0] a, input [BITS-1:0] b, output [BITS:0] s);
     parameter BITS = 4;
 

@@ -1,7 +1,5 @@
 `timescale 1ns/1ps
 
-`include "RippleCarryAdder.v"
-
 module RippleCarryAdder_tb();
 
     // Declare signals
