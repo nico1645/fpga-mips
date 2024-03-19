@@ -48,6 +48,6 @@ begin
 end
 
 // Output Logic
-assign light = right_state ? {3'b000, light_state} : {light_state, 3'b000};
+assign light = right_state ? {3'b000, light_state} : {light_state[0], light_state[1], light_state[2],  3'b000};
 
 endmodule

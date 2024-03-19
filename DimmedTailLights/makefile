@@ -8,8 +8,8 @@ BUILD_DIR = .
 
 # Targets
 test: 
-	$(IVERILOG) -o $(BUILD_DIR)/TailLights.vvp -I$(MODULES_DIR) ./TailLights_tb.v ./TailLights.v \
-	$(MODULES_DIR)/memory/PosEdgeFlipFlopAsyncReset.v
+	$(IVERILOG) -o $(BUILD_DIR)/DimmedTailLights.vvp -I$(MODULES_DIR) ./DimmedTailLights_tb.v ./DimmedTailLights.v \
+	./PWM.v $(MODULES_DIR)/memory/PosEdgeFlipFlopAsyncReset.v
 
 build:
 	mkdir -p ./build

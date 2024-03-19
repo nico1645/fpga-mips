@@ -17,6 +17,7 @@ create_project basys3_tail_light ./build -part xc7a35tcpg236-1
 # Add design source files
 add_files {TopLevelModul.v}
 add_files {DimmedTailLights.v}
+add_files {PWM.v}
 add_files {../modules/memory/PosEdgeFlipFlopAsyncReset.v}
 
 # Add constraint files

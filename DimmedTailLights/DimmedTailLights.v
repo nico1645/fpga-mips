@@ -1,10 +1,11 @@
 
-module TailLights(input clk, input reset, input left, input right, output [5:0] light);
+module DimmedTailLights(input clk, input reset, input left, input right, output [5:0] light);
 wire [2:0] light_state;
-reg [2:0] light_next_state;
 
 wire right_state;
 reg right_next_state;
+
+reg [2:0] state;
 
 reg [7:0] duty_1;
 reg [7:0] duty_2;
@@ -28,8 +29,8 @@ PWM pwm_3(
 
 
 initial begin
-    light_next_state = 3'b000;
     right_next_state = 1'b0;
+    state = 4'b0000;
     duty_1 = 8'b00000000;
     duty_2 = 8'b00000000;
     duty_3 = 8'b00000000;
@@ -39,13 +40,6 @@ wire reset_intern;
 assign reset_intern = ~reset;
 
 // State register
-PosEdgeFlipFlopAsyncReset #(.BITS(3)) light_flip_flop (
-    .clk(clk),
-    .reset(reset_intern),
-    .p(light_state),
-    .n(light_next_state)
-);
-
 PosEdgeFlipFlopAsyncReset #(.BITS(1)) right_flip_flop (
     .clk(clk),
     .reset(reset_intern),
@@ -56,22 +50,83 @@ PosEdgeFlipFlopAsyncReset #(.BITS(1)) right_flip_flop (
 // Next State Logic
 always @ (*)
 begin
-    case(light_state)
-        3'b000: 
+    case(state)
+        4'b0000: 
         begin
             right_next_state = right ? 1 : 0;
             if (left ^ right)
-                light_next_state = 3'b001;
+            begin
+                duty_1 = 8'b00000011;
+                duty_2 = 8'b00000000;
+                duty_3 = 8'b00000000;
+                state = 4'b0001;
+            end
             else
-                light_next_state = 3'b000;
+            begin
+                duty_1 = 8'b00000000;
+                duty_2 = 8'b00000000;
+                duty_3 = 8'b00000000;
+            end
         end
-        3'b001: light_next_state = 3'b011;
-        3'b011: light_next_state = 3'b111;
-        3'b111: light_next_state = 3'b000;
+        4'b0001: 
+        begin
+            duty_1 = 8'b00001111;
+            state = 4'b0010;
+        end
+        4'b0010:
+        begin
+            duty_1 = 8'b00111111;
+            state = 4'b0011;
+        end
+        4'b0011: 
+        begin
+            duty_1 = 8'b11111111;
+            state = 4'b0100;
+        end
+        4'b0100:
+        begin
+            duty_2 = 8'b00000011;
+            state = 4'b0101;
+        end
+        4'b0101: 
+        begin
+            duty_2 = 8'b00001111;
+            state = 4'b0101;
+        end
+        4'b0110: 
+        begin
+            duty_2 = 8'b00111111;
+            state = 4'b0111;
+        end
+        4'b0111: 
+        begin
+            duty_2 = 8'b11111111;
+            state = 4'b1000;
+        end
+        4'b1000: 
+        begin
+            duty_3 = 8'b00000011;
+            state = 4'b1001;
+        end
+        4'b1001: 
+        begin
+            duty_3 = 8'b00001111;
+            state = 4'b1010;
+        end
+        4'b1010: 
+        begin
+            duty_3 = 8'b00111111;
+            state = 4'b1011;
+        end
+        4'b1011: 
+        begin
+            duty_3 = 8'b11111111;
+            state = 4'b0000;
+        end
     endcase
 end
 
 // Output Logic
-assign light = right_state ? {3'b000, light_state} : {light_state, 3'b000};
+assign light = right_state ? {3'b000, light_state} : {light_state[0], light_state[1], light_state[2], 3'b000};
 
 endmodule
