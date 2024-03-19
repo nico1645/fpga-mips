@@ -16,8 +16,8 @@ build:
 	vivado -mode batch -source generate_bitstream.tcl
 clean:
 	rm -rf ./build
-	rm *.vvp
-	rm *.vcd
+	rm -f *.vvp 2> /dev/null
+	rm -f *.vcd 2> /dev/null
 
-.PHONY: test build
+.PHONY: test build clean
 
