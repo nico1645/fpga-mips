@@ -1,5 +1,5 @@
 
-module DimmedTailLights(input clk, input reset, input left, input right, output [5:0] light);
+module DimmedTailLights(input clk_org, input clk, input reset, input left, input right, output [5:0] light);
 wire [2:0] light_state;
 
 wire right_state;
@@ -13,17 +13,17 @@ reg [7:0] duty_2;
 reg [7:0] duty_3;
 
 PWM pwm_1(
-    .clk(clk),
+    .clk(clk_org),
     .duty_cycle(duty_1),
     .pwm_out(light_state[0])
 );
 PWM pwm_2(
-    .clk(clk),
+    .clk(clk_org),
     .duty_cycle(duty_2),
     .pwm_out(light_state[1])
 );
 PWM pwm_3(
-    .clk(clk),
+    .clk(clk_org),
     .duty_cycle(duty_1),
     .pwm_out(light_state[2])
 );

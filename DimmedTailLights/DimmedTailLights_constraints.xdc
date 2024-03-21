@@ -13,7 +13,7 @@ set_property PACKAGE_PIN U16 [get_ports lights[5]]
 set_property IOSTANDARD LVCMOS33 [get_ports {lights}]
 
 # Buttons 
-set_property PACKAGE_PIN W19 [get_ports left] 
+set_property PACKAGE_PIN W19 [get_ports right] 
 set_property PACKAGE_PIN U18 [get_ports reset] 
-set_property PACKAGE_PIN T17 [get_ports right] 
+set_property PACKAGE_PIN T17 [get_ports left] 
 set_property IOSTANDARD LVCMOS33 [get_ports {left reset right}]

@@ -9,6 +9,7 @@ ClkDiv #(.EXP(20)) clk_div (
 );
 
 DimmedTailLights tail_light(
+    .clk_org(clk),
     .clk(clk_en),
     .reset(reset),
     .left(left),
