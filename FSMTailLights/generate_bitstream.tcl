@@ -18,6 +18,7 @@ create_project basys3_tail_light ./build -part xc7a35tcpg236-1
 add_files {TopLevelModul.v}
 add_files {TailLights.v}
 add_files {../modules/memory/PosEdgeFlipFlopAsyncReset.v}
+add_files {../modules/clk_div/ClkDiv.v}
 
 # Add constraint files
 add_files {TailLights_constraints.xdc}

@@ -13,7 +13,7 @@ DimmedTailLights tail_light(
     .reset(reset),
     .left(left),
     .right(right),
-    .lights(lights)
+    .light(lights)
 );
 
 endmodule

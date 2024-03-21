@@ -19,6 +19,7 @@ add_files {TopLevelModul.v}
 add_files {DimmedTailLights.v}
 add_files {PWM.v}
 add_files {../modules/memory/PosEdgeFlipFlopAsyncReset.v}
+add_files {../modules/clk_div/ClkDiv.v}
 
 # Add constraint files
 add_files {DimmedTailLights_constraints.xdc}
