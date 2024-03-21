@@ -6,6 +6,7 @@ wire right_state;
 reg right_next_state;
 
 reg [2:0] state;
+wire [2:0] state_p;
 
 reg [7:0] duty_1;
 reg [7:0] duty_2;
@@ -45,6 +46,13 @@ PosEdgeFlipFlopAsyncReset #(.BITS(1)) right_flip_flop (
     .reset(reset_intern),
     .p(right_state),
     .n(right_next_state)
+);
+
+PosEdgeFlipFlopAsyncReset #(.BITS(4)) right_flip_flop (
+    .clk(clk),
+    .reset(reset_intern),
+    .p(state_p),
+    .n(state)
 );
 
 // Next State Logic
