@@ -15,15 +15,15 @@ DimmedTailLights dut(
 );
 
 
-always #100 clk = ~clk;
+always #10 clk = ~clk;
 
 initial begin
     $dumpfile("DimmedTailLights.vcd");
     $dumpvars;
     reset = 0; clk = 0; l = 1; r = 0;
-    #600
+    #180
     l = 0; r = 1;
-    #600
+    #200
     $stop;
 end
 

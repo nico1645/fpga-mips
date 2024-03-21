@@ -5,8 +5,8 @@ wire [2:0] light_state;
 wire right_state;
 reg right_next_state;
 
-reg [2:0] state;
-wire [2:0] state_p;
+reg [3:0] state;
+wire [3:0] state_p;
 
 reg [7:0] duty_1;
 reg [7:0] duty_2;
@@ -48,7 +48,7 @@ PosEdgeFlipFlopAsyncReset #(.BITS(1)) right_flip_flop (
     .n(right_next_state)
 );
 
-PosEdgeFlipFlopAsyncReset #(.BITS(4)) right_flip_flop (
+PosEdgeFlipFlopAsyncReset #(.BITS(4)) state_flip_flop (
     .clk(clk),
     .reset(reset_intern),
     .p(state_p),
@@ -58,7 +58,7 @@ PosEdgeFlipFlopAsyncReset #(.BITS(4)) right_flip_flop (
 // Next State Logic
 always @ (*)
 begin
-    case(state)
+    case(state_p)
         4'b0000: 
         begin
             right_next_state = right ? 1 : 0;
@@ -99,7 +99,7 @@ begin
         4'b0101: 
         begin
             duty_2 = 8'b00001111;
-            state = 4'b0101;
+            state = 4'b0110;
         end
         4'b0110: 
         begin
