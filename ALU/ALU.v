@@ -1,7 +1,10 @@
 
-module ALU(input [3:0] op, input [31:0] A, input [31:0] B, output reg [31:0] RES);
+module ALU(input [3:0] op, input [31:0] A, input [31:0] B, output reg [31:0] RES, output ZERO);
 
 reg [31:0] tmp;
+
+assign ZERO = RES == 32'b0 ? 1'b1: 1'b0;
+
 
 always @ (*)
 begin
