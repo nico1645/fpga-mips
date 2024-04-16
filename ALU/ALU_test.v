@@ -14,7 +14,6 @@
 //
 //
 // Dependencies:
-//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
@@ -65,7 +64,7 @@ module ALU_test();
         // TO DO:
         // Read the content of the file testvectors_hex.txt into the
         // array testvec. The file contains values in hexadecimal format
-        $readmemh("testvectors_hex.txt",testvec);
+        $readmemh("results_2.txt",testvec);
         
         err_cnt = 0; // number of errors
         vec_cnt = 0; // number of vectors
@@ -118,4 +117,5 @@ module ALU_test();
 
     ALU alu_dut(.A(a), .B(b), .op(aluop), .RES(result), .ZERO(zero));
     
+    //bad_ALU alu_dut(.a(a), .b(b), .aluop(aluop), .result(result), .zero(zero));
 endmodule

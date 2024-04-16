@@ -3,6 +3,10 @@ module ALU(input [3:0] op, input [31:0] A, input [31:0] B, output reg [31:0] RES
 
 reg [31:0] tmp;
 
+//LAB REPORT ADDITION sum[32] is the overflow bit
+wire [32:0] sum;
+RippleCarryAdder #(.BITS(32)) ripple_carry_adder(.a(A), .b(B), .s(sum));
+
 assign ZERO = RES == 32'b0 ? 1'b1: 1'b0;
 
 
@@ -12,7 +16,7 @@ begin
         //Add
         4'b0000:
         begin
-            RES = A + B;
+            RES = sum[31:0];
         end
         //Subtract
         4'b0010:
@@ -43,7 +47,7 @@ begin
         4'b1010:
         begin
             tmp = A[30:0] - B[30:0];
-            RES = {tmp[31], 31'b0};
+            RES = {31'b0, tmp[31]};
         end
     endcase
 
