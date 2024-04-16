@@ -5,8 +5,8 @@ wire [2:0] light_state;
 wire right_state;
 reg right_next_state;
 
-reg [3:0] state;
-wire [3:0] state_p;
+wire [3:0] state;
+reg [3:0] state_next;
 
 reg [7:0] duty_1;
 reg [7:0] duty_2;
@@ -51,14 +51,14 @@ PosEdgeFlipFlopAsyncReset #(.BITS(1)) right_flip_flop (
 PosEdgeFlipFlopAsyncReset #(.BITS(4)) state_flip_flop (
     .clk(clk),
     .reset(reset_intern),
-    .p(state_p),
-    .n(state)
+    .p(state),
+    .n(state_next)
 );
 
 // Next State Logic
 always @ (*)
 begin
-    case(state_p)
+    case(state)
         4'b0000: 
         begin
             right_next_state = right ? 1 : 0;
@@ -67,7 +67,7 @@ begin
                 duty_1 = 8'b00000011;
                 duty_2 = 8'b00000000;
                 duty_3 = 8'b00000000;
-                state = 4'b0001;
+                state_next = 4'b0001;
             end
             else
             begin
@@ -79,57 +79,57 @@ begin
         4'b0001: 
         begin
             duty_1 = 8'b00001111;
-            state = 4'b0010;
+            state_next = 4'b0010;
         end
         4'b0010:
         begin
             duty_1 = 8'b00111111;
-            state = 4'b0011;
+            state_next = 4'b0011;
         end
         4'b0011: 
         begin
             duty_1 = 8'b11111111;
-            state = 4'b0100;
+            state_next = 4'b0100;
         end
         4'b0100:
         begin
             duty_2 = 8'b00000011;
-            state = 4'b0101;
+            state_next = 4'b0101;
         end
         4'b0101: 
         begin
             duty_2 = 8'b00001111;
-            state = 4'b0110;
+            state_next = 4'b0110;
         end
         4'b0110: 
         begin
             duty_2 = 8'b00111111;
-            state = 4'b0111;
+            state_next = 4'b0111;
         end
         4'b0111: 
         begin
             duty_2 = 8'b11111111;
-            state = 4'b1000;
+            state_next = 4'b1000;
         end
         4'b1000: 
         begin
             duty_3 = 8'b00000011;
-            state = 4'b1001;
+            state_next = 4'b1001;
         end
         4'b1001: 
         begin
             duty_3 = 8'b00001111;
-            state = 4'b1010;
+            state_next = 4'b1010;
         end
         4'b1010: 
         begin
             duty_3 = 8'b00111111;
-            state = 4'b1011;
+            state_next = 4'b1011;
         end
         4'b1011: 
         begin
             duty_3 = 8'b11111111;
-            state = 4'b0000;
+            state_next = 4'b0000;
         end
     endcase
 end
