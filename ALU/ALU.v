@@ -46,7 +46,7 @@ begin
         //slt
         4'b1010:
         begin
-            tmp = A[30:0] - B[30:0];
+            tmp = A - B;
             RES = {31'b0, tmp[31]};
         end
     endcase

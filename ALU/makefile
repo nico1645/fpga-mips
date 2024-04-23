@@ -8,7 +8,7 @@ BUILD_DIR = .
 
 # Targets
 test: 
-	$(IVERILOG) -o $(BUILD_DIR)/ALU.vvp -I$(MODULES_DIR) ./ALU_test.v ./ALU.v \
+	$(IVERILOG) -o $(BUILD_DIR)/ALU.vvp -I$(MODULES_DIR) ./ALU_test.v ./bad_ALU.v ./ALU.v \
 	$(MODULES_DIR)/adder/RippleCarryAdder.v $(MODULES_DIR)/adder/FullAdder.v
 	vvp $(BUILD_DIR)/ALU.vvp
 build:

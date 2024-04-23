@@ -37,25 +37,23 @@ assign {ss0,ss1,Ss2,ss3} = aluop; // make assigns
 // define the logicfunction
 always @ (*)
 begin
-  if (ss1 == 0)
-    if (ss0 == 0)
+  if (Ss2 == 0)
+    if (ss3 == 0)
         logicsel = a & b;
     else
         logicsel = a | b;
-        else
-        if (ss0 == 1)
+  else
+        if (ss3 == 1)
             logicsel = ~(a | b);
         else
             logicsel = a ^ b;
-    end
+end
 
 always @ (aluop, a, b)
     if (aluop == 4'b1010)
     begin
-        diff <= a - b;			// calculate the difference
-        slt <= 0;				// default value
-        if (diff[31] == 1)
-            slt <= 1;			// if MSB is 1 slt is 1
+        diff = a - b;			// calculate the difference
+        slt = {31'b0, diff[31]};			// if MSB is 1 slt is 1
     end
 
 always @ (*)
@@ -63,7 +61,7 @@ begin
     case (aluop)
         4'b0000 : alu_val = a + b;
         4'b0010 : alu_val = a - b;
-        4'b1011 : alu_val = slt;
+        4'b1010 : alu_val = slt;
         default : alu_val = logicsel;
     endcase
 end
