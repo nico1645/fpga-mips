@@ -24,14 +24,14 @@ PWM pwm_2(
 );
 PWM pwm_3(
     .clk(clk_org),
-    .duty_cycle(duty_1),
+    .duty_cycle(duty_3),
     .pwm_out(light_state[2])
 );
 
 
 initial begin
     right_next_state = 1'b0;
-    state = 4'b0000;
+    state_next = 4'b0000;
     duty_1 = 8'b00000000;
     duty_2 = 8'b00000000;
     duty_3 = 8'b00000000;
@@ -131,6 +131,7 @@ begin
         begin
             duty_3 = 8'b11111111;
             state_next = 4'b0000;
+            right_next_state = 1'b0;
         end
     endcase
 end
