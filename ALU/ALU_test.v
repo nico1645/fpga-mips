@@ -117,7 +117,7 @@ module ALU_test();
     // TO DO:
     // Instantiate the Unit Under Test (UUT)
 
-  //  ALU alu_dut(.A(a), .B(b), .op(aluop), .RES(result), .ZERO(zero));
+    ALU alu_dut(.A(a), .B(b), .op(aluop), .RES(result), .ZERO(zero));
     
-    bad_ALU alu_dut(.a(a), .b(b), .aluop(aluop), .result(result), .zero(zero));
+  //  bad_ALU alu_dut(.a(a), .b(b), .aluop(aluop), .result(result), .zero(zero));
 endmodule

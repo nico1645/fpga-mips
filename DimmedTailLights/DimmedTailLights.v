@@ -64,13 +64,14 @@ begin
             right_next_state = right ? 1 : 0;
             if (left ^ right)
             begin
-                duty_1 = 8'b00000011;
+                duty_1 = 8'b01000000;
                 duty_2 = 8'b00000000;
                 duty_3 = 8'b00000000;
                 state_next = 4'b0001;
             end
             else
             begin
+                state_next = 4'b0000;
                 duty_1 = 8'b00000000;
                 duty_2 = 8'b00000000;
                 duty_3 = 8'b00000000;
@@ -78,12 +79,12 @@ begin
         end
         4'b0001: 
         begin
-            duty_1 = 8'b00001111;
+            duty_1 = 8'b10000000;
             state_next = 4'b0010;
         end
         4'b0010:
         begin
-            duty_1 = 8'b00111111;
+            duty_1 = 8'b11000000;
             state_next = 4'b0011;
         end
         4'b0011: 
@@ -93,17 +94,17 @@ begin
         end
         4'b0100:
         begin
-            duty_2 = 8'b00000011;
+            duty_2 = 8'b01000000;
             state_next = 4'b0101;
         end
         4'b0101: 
         begin
-            duty_2 = 8'b00001111;
+            duty_2 = 8'b10000000;
             state_next = 4'b0110;
         end
         4'b0110: 
         begin
-            duty_2 = 8'b00111111;
+            duty_2 = 8'b11000000;
             state_next = 4'b0111;
         end
         4'b0111: 
@@ -113,17 +114,17 @@ begin
         end
         4'b1000: 
         begin
-            duty_3 = 8'b00000011;
+            duty_3 = 8'b01000000;
             state_next = 4'b1001;
         end
         4'b1001: 
         begin
-            duty_3 = 8'b00001111;
+            duty_3 = 8'b10000000;
             state_next = 4'b1010;
         end
         4'b1010: 
         begin
-            duty_3 = 8'b00111111;
+            duty_3 = 8'b11000000;
             state_next = 4'b1011;
         end
         4'b1011: 
@@ -135,6 +136,6 @@ begin
 end
 
 // Output Logic
-assign light = right_state ? {3'b000, light_state} : {light_state[0], light_state[1], light_state[2], 3'b000};
+assign light = right_state ? {3'b000, light_state[0], light_state[1], light_state[2]} : {light_state[2], light_state[1], light_state[0], 3'b000};
 
 endmodule

@@ -1,5 +1,5 @@
 module PWM(
-    input wire clk,            // Clock input
+    input clk,            // Clock input
     input [7:0] duty_cycle,   // Duty cycle input (0-255)
     output reg pwm_out        // PWM output
 );
