@@ -20,11 +20,13 @@ always #100 clk = ~clk;
 initial begin
     $dumpfile("TailLights.vcd");
     $dumpvars;
-    reset = 0; clk = 0; l = 1; r = 0;
-    #600
+    reset = 1; clk = 0; l = 0; r = 0;
+    #100
+    reset = 0; r = 1;
+    #900
     l = 0; r = 1;
     #600
-    $stop;
+    $finish;
 end
 
 endmodule
