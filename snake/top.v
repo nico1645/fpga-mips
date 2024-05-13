@@ -23,6 +23,7 @@ module top(
         // TODO PART II for Lab 8
         // add input port to read the switch value for speed control of the snake
 		  input             RESET,
+          input      [1:0]  SPEED,
 		  output     [6:0]  LED,
 	     output reg [3:0]  AN
     );
@@ -84,7 +85,7 @@ clockdiv ClockDiv (
    // Create the 32 bit IOReadData based on IOAddr value. Remember IOAddr is a 4-bit
    // value.
     
-   // assign IOReadData = ;
+   assign IOReadData = IOAddr == 4'b0100 ? {30'b0, SPEED} : DispReg;
 
 
 // Register to save the 28-bit Value

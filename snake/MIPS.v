@@ -152,7 +152,7 @@ module MIPS(
    assign IsMemWrite  =  Instr[31:26] == 6'b101011 ? 1 : 0; // Is 1 when there is a SW instruction on DataMem address
    assign IOWriteData =  WriteData;   // This line is connected directly to WriteData
    assign IOAddr      =  Instr[3:0];  // The LSB 4 bits of the Address is assigned to IOAddr
-   assign IOWriteEn   =  IOWriteData[31:26] == 6'b101011 ? 1 : 0;  // Is 1 when there is a SW instruction on IO address 
+   assign IOWriteEn   =  IsMemWrite & IsIO;  // Is 1 when there is a SW instruction on IO address 
    
 
    assign ReadMemIO   = IsIO ? IOReadData : ReadData;   // Mux selects memory or I/O	
