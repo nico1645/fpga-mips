@@ -29,35 +29,26 @@ forward:
    
    addi $t4, $t4, 4 # increment to the next address
    addi $t2, $0, 0 # clear $t2 counter
+   lw $t6, 0x7ff4($0)
+   addi $t1, $0, 0
+   beq $t6, $t1, speed1
+   addi $t1, $t1, 1
+   beq $t6, $t1, speed2
+   addi $t1, $t1, 1
+   beq $t6, $t1, speed3
+   lw $t3, s4
 
 wait:
-   lw $t6, 0x7ff4($0)
-   addi $t7, $0, 0
-   beq $t6, $t7, speed1
-   beq $t6, $t7, speed2
-   beq $t6, $t7, speed3
-   beq $t6, $t7, speed4
    beq $t2,$t3,forward	
    addi  $t2, $t2, 1     # increment counter
    j wait
+
 speed1:
-   addi $t7, $t7, 1
-   lw $t1, s1
-   addi $t3, $t1, 0
-   j wait
+    lw $t3, s1
+    j wait
 speed2:
-   addi $t7, $t7, 1
-   lw $t1, s2
-   addi $t3, $t1, 0
-   j wait
+    lw $t3, s2
+    j wait
 speed3:
-   addi $t7, $t7, 1
-   lw $t1, s3
-   addi $t3, $t1, 0
-   j wait
-speed4:
-   addi $t7, $t7, 1
-   lw $t1, s4
-   addi $t3, $t1, 0
-   j wait
-   
+    lw $t3, s3
+    j wait
