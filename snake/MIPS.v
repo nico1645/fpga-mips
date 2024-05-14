@@ -96,7 +96,7 @@ module MIPS(
    /////////////////////////////////////
    // Instantiate the Instruction Memory
 	  InstructionMemory i_imem (
-                                .A(PC[5:0]),
+                                .A(PC[7:2]),
                                 .RD(Instr)
                               );
 										
@@ -139,7 +139,7 @@ module MIPS(
 	// Instantiate the Data Memory
 	  DataMemory i_dmem (
                             .CLK(CLK),
-                            .A(ALUResult[5:0]),
+                            .A(ALUResult[7:2]),
                             .WE(IsMemWrite),
                             .WD(WriteData),
                             .RD(ReadData)
