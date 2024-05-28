@@ -35,8 +35,8 @@ module ALU(
   wire [31:0] n_b;        // inverted b
   wire [31:0] sel_b;      // select b or n_b;
   wire [31:0] slt;        // output of the slt extension
-  wire [31:0] lo;
-  reg [31:0] lo_next;
+  reg [31:0] lo;
+  wire [31:0] lo_next;
   wire [31:0] srl;
   wire [31:0] tmp;
   
@@ -52,8 +52,9 @@ module ALU(
   always @(posedge clk, posedge reset)
   begin
       if (reset == 1'b1)
-          lo_next = 32'b0;
-      lo <= lo_next;
+          lo = 32'b0;
+      else
+          lo = lo_next;
   end
   
   // adder subtractor
